@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 
 
 typedef struct _node {
@@ -13,16 +14,16 @@ typedef struct _node {
 
 int main()
 {
-   time_t t;
+   char Option_List[4] = {'A','B','C','D'};
    char line[512];
    node * head = NULL;
    node * tail = NULL;
    node * new;
    node * aux;
    int i;
-   srand((unsigned) time(&t));
+   srand(time(0));
    int r = rand() % 4;
-   
+   char player_choice;
    
    FILE *in_file = fopen("questions.txt", "r");
    if (in_file == NULL)
@@ -87,44 +88,91 @@ int main()
             {  
                
                printf("*** Question: %s",aux->text);
-               printf("*** A: %s",aux->answer[0]);
-               printf("*** B: %s",aux->answer[1]);
-               printf("*** C: %s",aux->answer[2]);
-               printf("*** D: %s",aux->answer[3]);
+               printf("*** %c: %s",Option_List[0],aux->answer[0]);
+               printf("*** %c: %s",Option_List[1],aux->answer[1]);
+               printf("*** %c: %s",Option_List[2],aux->answer[2]);
+               printf("*** %c: %s",Option_List[3],aux->answer[3]);
+               
                break;
             }
 
             else if (r == 1)
             {
                printf("*** Question: %s",aux->text);
-               printf("*** A: %s",aux->answer[1]);
-               printf("*** B: %s",aux->answer[0]);
-               printf("*** C: %s",aux->answer[2]);
-               printf("*** D: %s",aux->answer[3]);
+               printf("*** %c: %s",Option_List[0],aux->answer[1]);
+               printf("*** %c: %s",Option_List[1],aux->answer[0]);
+               printf("*** %c: %s",Option_List[2],aux->answer[2]);
+               printf("*** %c: %s",Option_List[3],aux->answer[3]);
                break;
             }
 
             else if (r == 2)
             {
                printf("*** Question: %s",aux->text);
-               printf("*** A: %s",aux->answer[1]);
-               printf("*** B: %s",aux->answer[2]);
-               printf("*** C: %s",aux->answer[0]);
-               printf("*** D: %s",aux->answer[3]);
+               printf("*** %c: %s",Option_List[0],aux->answer[1]);
+               printf("*** %c: %s",Option_List[1],aux->answer[2]);
+               printf("*** %c: %s",Option_List[2],aux->answer[0]);
+               printf("*** %c: %s",Option_List[3],aux->answer[3]);
                break;
             }
 
             else
             {
-               printf("%d", r);
+               
                printf("*** Question: %s",aux->text);
-               printf("*** A: %s",aux->answer[1]);
-               printf("*** B: %s",aux->answer[2]);
-               printf("*** C: %s",aux->answer[3]);
-               printf("*** D: %s",aux->answer[0]);
+               printf("*** %c: %s",Option_List[0],aux->answer[1]);
+               printf("*** %c: %s",Option_List[1],aux->answer[2]);
+               printf("*** %c: %s",Option_List[2],aux->answer[3]);
+               printf("*** %c: %s",Option_List[3],aux->answer[0]);
+               
                break;
             }
          }
+   }  
+   player_choice = getc(stdin);
+   if (r == 0)
+   {
+      if(toupper(player_choice) == Option_List[0])
+		   puts("*** Hooray!");
+         else
+      {
+         puts("*** Woops... That's not correct.");
+         printf("*** The correct answer was %c: %s", Option_List[0],aux->answer[0]);
+      }
+   }
+   
+   else if (r == 1)
+   {
+      if(toupper(player_choice) == Option_List[1])
+		   puts("*** Hooray!");
+      else
+      {
+         puts("*** Woops... That's not correct.");
+         printf("*** The correct answer was %c: %s", Option_List[1],aux->answer[0]);
+      }
+   }
+
+   else if (r == 2)
+   {
+      if(toupper(player_choice) == Option_List[2])
+		   puts("*** Hooray!");
+      else
+      {
+         puts("*** Woops... That's not correct.");
+         printf("*** The correct answer was %c: %s", Option_List[2],aux->answer[0]);
+      }
+   }
+
+   else if (r == 3)
+   {
+      if(toupper(player_choice) == Option_List[3])
+		   puts("*** Hooray!");
+      else
+      {
+         puts("*** Woops... That's not correct.");
+         printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
+      }
+         
    }
 
    return 0;
