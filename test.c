@@ -1,39 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-
-void readFile(void);
-
-typedef struct 
-	{
-		char question[128];
-		char answer[4][128];
-		int difficulty;
-	} pergunta;
+#include <string.h>
 
 int main()
 {
-   readFile();
-}
+
+   char easy[10] = {"easy"};
+   char medium[10] = {"medium"};
+   char hard[10] = {"hard"};
+
+   FILE *in_file = fopen("quest", "r");
 
 
-
-void readFile()
-{
-   char ch;
-   FILE *fp;
-   fp = fopen("abc.txt", "r"); // read mode
-
-   if (fp == NULL)
+   if(medium[0]!= '\0')
    {
-      perror("Error while opening the file.\n");
-      exit(EXIT_FAILURE);
+      printf("%s\n", medium);
+
+      fclose(in_file);
    }
 
-   puts("The contents of file are:\n");
+   else if(easy[0]!= '\0')
+   {
+      
+      printf("%s\n", easy);
 
-   while((ch = fgetc(fp)) != EOF)
-      printf("%c", ch);
+      fclose(in_file);
+   }
 
-   fclose(fp);
+   else if(hard[0]!= '\0')
+   {
+      printf("%s\n", hard);
+
+      fclose(in_file);
+   }
+
+
+   return 0;
 }
