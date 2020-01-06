@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 //estrutura cria vector para PERGUNTA, 4 RESPOSTAS, DIFICULDADE
 typedef struct _node {
@@ -12,13 +13,16 @@ typedef struct _node {
 
 int main()
 {
+   time_t t;
    char line[512];
    node * head = NULL;// sempre primeiro node
    node * tail = NULL;// tail ai ser sempre o último node (última pergunta)
    node * new;
    node * aux;
    int i;
+   srand((unsigned) time(&t));
    int r = rand() % 4;
+   
    
    FILE *in_file = fopen("questions.txt", "r");
    if (in_file == NULL)
@@ -93,20 +97,20 @@ int main()
             else if (r == 1)
             {
                printf("*** Question: %s",aux->text);
-               printf("*** A: %s",new->answer[1]);
-               printf("*** B: %s",new->answer[0]);
-               printf("*** C: %s",new->answer[2]);
-               printf("*** D: %s",new->answer[3]);
+               printf("*** A: %s",aux->answer[1]);
+               printf("*** B: %s",aux->answer[0]);
+               printf("*** C: %s",aux->answer[2]);
+               printf("*** D: %s",aux->answer[3]);
                break;
             }
 
             else if (r == 2)
             {
                printf("*** Question: %s",aux->text);
-               printf("*** A: %s",new->answer[1]);
-               printf("*** B: %s",new->answer[2]);
-               printf("*** C: %s",new->answer[0]);
-               printf("*** D: %s",new->answer[3]);
+               printf("*** A: %s",aux->answer[1]);
+               printf("*** B: %s",aux->answer[2]);
+               printf("*** C: %s",aux->answer[0]);
+               printf("*** D: %s",aux->answer[3]);
                break;
             }
 
@@ -114,10 +118,10 @@ int main()
             {
                printf("%d", r);
                printf("*** Question: %s",aux->text);
-               printf("*** A: %s",new->answer[1]);
-               printf("*** B: %s",new->answer[2]);
-               printf("*** C: %s",new->answer[3]);
-               printf("*** D: %s",new->answer[0]);
+               printf("*** A: %s",aux->answer[1]);
+               printf("*** B: %s",aux->answer[2]);
+               printf("*** C: %s",aux->answer[3]);
+               printf("*** D: %s",aux->answer[0]);
                break;
             }
          }
