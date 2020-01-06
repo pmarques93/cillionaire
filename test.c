@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+//estrutura cria vector para PERGUNTA, 4 RESPOSTAS, DIFICULDADE
 typedef struct _node {
    char text[128];
    char answer[4][128];
@@ -13,8 +13,8 @@ typedef struct _node {
 int main()
 {
    char line[512];
-   node * head = NULL;
-   node * tail = NULL;
+   node * head = NULL;// sempre primeiro node
+   node * tail = NULL;// tail ai ser sempre o último node (última pergunta)
    node * new;
    node * aux;
    int i;
@@ -66,7 +66,7 @@ int main()
 
       if (tail != NULL)
       {
-         tail->next = new;
+         tail->next = new;//se o TAIL não for o último, cria um novo node
       }
       tail = new;
 
