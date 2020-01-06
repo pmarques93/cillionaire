@@ -15,14 +15,9 @@ int main()
    char line[512];
    node * head = NULL;
    node * tail = NULL;
-   int n_questions = 0;
    node * new;
    node * aux;
    int i;
-
-  // char easy[10] = {"easy"};
-  // char medium[10] = {"medium"};
-  // char hard[10] = {"hard"};
 
    FILE *in_file = fopen("questions.txt", "r");
    if (in_file == NULL)
@@ -63,7 +58,6 @@ int main()
       else
         new->difficulty = hard;
 
-      n_questions ++;
 
       if (head == NULL)
       {
@@ -81,7 +75,12 @@ int main()
 
    for (aux = head, i= 0; aux != NULL; aux = aux -> next, i++)
    {
-      printf("%d: *** question: %s", i, aux->text);
+      if(aux->difficulty == 0)
+         {
+            printf("*** question: %s",aux->text);
+            printf("%d\n", aux->difficulty);
+            break;
+         }
    }
 
    return 0;
