@@ -18,7 +18,8 @@ int main()
    node * new;
    node * aux;
    int i;
-
+   int r = rand() % 4;
+   
    FILE *in_file = fopen("questions.txt", "r");
    if (in_file == NULL)
    {
@@ -77,9 +78,48 @@ int main()
    {
       if(aux->difficulty == 0)
          {
-            printf("*** question: %s",aux->text);
-            printf("%d\n", aux->difficulty);
-            break;
+            
+            if (r == 0)
+            {  
+               
+               printf("*** Question: %s",aux->text);
+               printf("*** A: %s",aux->answer[0]);
+               printf("*** B: %s",aux->answer[1]);
+               printf("*** C: %s",aux->answer[2]);
+               printf("*** D: %s",aux->answer[3]);
+               break;
+            }
+
+            else if (r == 1)
+            {
+               printf("*** Question: %s",aux->text);
+               printf("*** A: %s",new->answer[1]);
+               printf("*** B: %s",new->answer[0]);
+               printf("*** C: %s",new->answer[2]);
+               printf("*** D: %s",new->answer[3]);
+               break;
+            }
+
+            else if (r == 2)
+            {
+               printf("*** Question: %s",aux->text);
+               printf("*** A: %s",new->answer[1]);
+               printf("*** B: %s",new->answer[2]);
+               printf("*** C: %s",new->answer[0]);
+               printf("*** D: %s",new->answer[3]);
+               break;
+            }
+
+            else
+            {
+               printf("%d", r);
+               printf("*** Question: %s",aux->text);
+               printf("*** A: %s",new->answer[1]);
+               printf("*** B: %s",new->answer[2]);
+               printf("*** C: %s",new->answer[3]);
+               printf("*** D: %s",new->answer[0]);
+               break;
+            }
          }
    }
 

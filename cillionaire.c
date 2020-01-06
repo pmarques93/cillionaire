@@ -2,74 +2,64 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 #define MSG_BYE "*** Sad to see you go..."
 #define MSG_UNKNOWN "*** Unknown option..."
-
+FILE * abreFicheiro (char *, char *);
 void pressKey(void);
 void printMenu(void);
 void printCredits(void);
 void jokerBonus(void);
+typedef struct 
+	{
+		char question[128];
+		char answer[4][128];
+		int difficulty;
+	} pergunta;
 
 int main(int argc, char** argv)
-{
-	/*
-	if(argc == 1)
-	else if(argc == 2)
-	*/
+{	
+	FILE * question;
+	char player_command;
+	int seed;
+	char nome[100] = "newbie";
+	char line [100];
+	char aux_nome [00];
+	char aux;
 
-	printMenu();
-	pressKey();
-	return 0;
-}
-
-/* press key to call a function */
-void pressKey()
-{
-	
-	/* variables */
-	char c;
-	
-	while (c != 'q')
+	if (argc > 1)
 	{
-		// verifica se as jogadas passam do limite //
-	
-		scanf(" %c", &c);
-		/////////////////////////
-		if (c == 'h')
-		{
-			printMenu();
-		}
-		/////////////////////////
-		
-		else if (c == 'n')
-		{
-			takeName();
-		}
-		/////////////////////////
-		
-		else if (c == 'c')
-		{
-			printCredits();
-		}
-		/////////////////////////
-		else if (c == 'j')
-		{
-			jokerBonus();
-		}
-		/////////////////////////
-		else if (c == 'q')
-		{
-			puts(MSG_BYE);
-			break;
-		}
-		/////////////////////////
-		else
-		{
-			puts(MSG_UNKNOWN);
-		}
+		seed = atoi(argv[1]);
 	}
+	else
+	{
+		seed = time(NULL);
+	}
+	question = abreFicheiro(argv[1], "r");
+	
+	
+	printMenu();
+	fgets(line, 100, stdin);
+	
+	switch(line [0])
+	{
+		case 'n' :
+			if (sscanf(line,"%c%s", &aux, aux_nome) == 2)
+				{
+					strcpy(nome, aux_nome);
+					
+				}
+			
+			printf("*** Hi %s, let's get started!\n", nome);
+			break;
+
+			
+			
+	}
+	
 }
+
 
 /* print the option menu */
 void printMenu(void)
@@ -101,12 +91,23 @@ void jokerBonus(void)
 	puts("*** JOKER BONUS ***");
 }
 
-
-/* Takes name from player else assigns name 'Newbie' */
-void takeName(char argc)
+FILE * abreFicheiro(char * nome, char * mode)
 {
-	if (argc < 1);
-		char name = 'Newbie';
-
-
+	FILE * r;
+	printf("A abrir o ficheiro\n");
+	r = fopen(nome, mode);
+	if (r == NULL)
+	{
+		fprintf(stdout, "*** Não foi possivel abrir o ficheiro %s.\n", nome);
+		exit(1);
+	}
+	return r;
 }
+
+
+
+
+
+
+
+
