@@ -41,6 +41,13 @@ void pressKey()
 			printMenu();
 		}
 		/////////////////////////
+		
+		else if (c == 'n')
+		{
+			takeName();
+		}
+		/////////////////////////
+		
 		else if (c == 'c')
 		{
 			printCredits();
@@ -66,10 +73,20 @@ void pressKey()
 
 /* print the option menu */
 void printMenu(void)
-{
-	puts("****************************************");
-	puts("*** menu ***");
-	puts("****************************************");
+{	
+	puts("********************************************");
+	puts("***            CILLIONAIRE                 *");
+	puts("********************************************");
+	puts("*** n <name>     - new game                *");
+	puts("*** q            - quit                    *");
+	puts("*** h            - show this menu          *");
+	puts("*** r <filename> - resume game             *");
+	puts("*** s <filename> - save progress and quit  *");
+	puts("*** j 50         - play 50:50 joker        *");
+	puts("*** j 25         - play 25:75 joker        *");
+	puts("*** c            - show credits            *");
+	puts("********************************************");
+
 }
 
 /* print credits menu */
@@ -82,4 +99,14 @@ void printCredits(void)
 void jokerBonus(void)
 {
 	puts("*** JOKER BONUS ***");
+}
+
+
+/* Takes name from player else assigns name 'Newbie' */
+void takeName(char argc)
+{
+	if (argc < 1);
+		char name = 'Newbie';
+
+
 }
