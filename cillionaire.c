@@ -12,66 +12,36 @@ void pressKey(void);
 void printMenu(void);
 void printCredits(void);
 void jokerBonus(void);
-
-
-
+void keyPress(void);
 
 typedef struct _node {
    char text[128];
    char answer[4][128];
    enum {easy, medium, hard} difficulty;
    struct _node * next;
-   } node;
+} node;
 
-   node* readFile(void);
-   void game(node*);
-
-   int seed;
+node* readFile();
+void game(node*, char*);
+int seed;
 
 int main(int argc, char** argv)
 {	
-	
-	node* head;
-	head = readFile();
-	char nome[100] = "newbie";
-	char line [100];
-	char aux_nome [100];
-	char aux_2;
-   
-	if (argc > 1)
-   
 
+	if (argc > 1)
 	{
 		seed = atoi(argv[1]);
 	}
 	else
 	{
-      
 		seed = time(NULL);
 	}
 
 	printMenu();
-	fgets(line, 100, stdin);
-	
-	switch(line [0])
-	{
-		case 'n' :
-			if (sscanf(line,"%c%s", &aux_2, aux_nome) == 2)
-				{
-					strcpy(nome, aux_nome);
-					
-				}
-			
-			printf("*** Hi %s, let's get started!\n", nome);
-			game(head);
-         break;
 
-			
-			
-	}
+	keyPress();
    return 0;	
 }
-
 
 /* print the option menu */
 void printMenu(void)
@@ -88,13 +58,17 @@ void printMenu(void)
 	puts("*** j 25         - play 25:75 joker        *");
 	puts("*** c            - show credits            *");
 	puts("********************************************");
-
 }
 
 /* print credits menu */
 void printCredits(void)
 {
+   puts("*********************");
 	puts("*** GAME CREATORS ***");
+   puts("***   MR. Green   ***");
+   puts("***  Jund Master  ***");
+   puts("***    Pedro M    ***");
+   puts("*********************");
 }
 
 /* gives joker Bonus */
@@ -103,24 +77,15 @@ void jokerBonus(void)
 	puts("*** JOKER BONUS ***");
 }
 
-
-
-
-
 node* readFile()
 {  
-   
-   
    char line[512];
    node * head = NULL;
    node * tail = NULL;
    node * new;
-   
-   
-   
+    
    FILE *in_file;
    in_file = fopen("questions.txt", "r");
-   
    
    if (in_file == NULL)
    {
@@ -150,11 +115,11 @@ node* readFile()
       strcpy(new->answer[3], &line[8]);
 
       fgets(line, 512, in_file); // ler CATEGORY
-
+      
       fgets(line, 512, in_file); // ler DIFFICULTY
-      if (strcmp(line, "DIFFICULTY=easy\n")== 0)
+      if (strcmp(line, "DIFFICULTY=easy\n") == 0)
          new->difficulty = easy;
-      else if(strcmp(line, "DIFFICULTY=medium\n") == 1)
+      else if(strcmp(line, "DIFFICULTY=medium\n") == 0)
          new->difficulty = medium;
       else
         new->difficulty = hard;
@@ -176,7 +141,47 @@ node* readFile()
    return head;
 }
 
-void game(node*head)
+void keyPress()
+{
+   node* head;
+	head = readFile();
+	char line [100];
+	char aux_nome [100] = "newbie";
+	char aux_2;
+
+   while (line[0] != 'q')
+   {
+      fgets(line, 100, stdin);
+      switch(line [0])
+      {
+         case 'n' :  // n, starts game
+            sscanf(line,"%c%s", &aux_2, aux_nome);
+            printf("*** Hi %s, let's get started!\n", aux_nome);
+            game(head, aux_nome);
+            break;
+
+         case 'h' :
+            printMenu();
+            break;
+
+         case 'c' :
+            printCredits();
+            break;
+
+         case 'q' :  // q, quits the program
+            break;
+
+         case '\n' :
+            break;
+
+         default: // if none of the cases above, print unknown option
+            puts(MSG_UNKNOWN);
+      }
+   }
+   puts(MSG_BYE);
+}
+
+void game(node*head, char * aux_nome)
 {	
    node * aux;
 	char player_choice;
@@ -187,23 +192,20 @@ void game(node*head)
 	for (aux = head; aux != NULL; aux = aux -> next, i++)
    {  
       
-      if(aux->difficulty == 0)         
+      if(aux->difficulty >= 0 && aux->difficulty < 3)       
       {
          if (r == 0)
          {  
-            
             printf("*** Question: %s",aux->text);
             printf("*** %c: %s",Option_List[0],aux->answer[0]);
             printf("*** %c: %s",Option_List[1],aux->answer[1]);
             printf("*** %c: %s",Option_List[2],aux->answer[2]);
-            printf("*** %c: %s",Option_List[3],aux->answer[3]);
-            
+            printf("*** %c: %s",Option_List[3],aux->answer[3]);   
             break;
          }
 
          else if (r == 1)
-         {
-            
+         {  
             printf("*** Question: %s",aux->text);
             printf("*** %c: %s",Option_List[0],aux->answer[1]);
             printf("*** %c: %s",Option_List[1],aux->answer[0]);
@@ -214,7 +216,6 @@ void game(node*head)
 
          else if (r == 2)
          {
-            puts("not");
             printf("*** Question: %s",aux->text);
             printf("*** %c: %s",Option_List[0],aux->answer[1]);
             printf("*** %c: %s",Option_List[1],aux->answer[2]);
@@ -225,18 +226,15 @@ void game(node*head)
 
          else
          {
-            puts("working");
             printf("*** Question: %s",aux->text);
             printf("*** %c: %s",Option_List[0],aux->answer[1]);
             printf("*** %c: %s",Option_List[1],aux->answer[2]);
             printf("*** %c: %s",Option_List[2],aux->answer[3]);
-            printf("*** %c: %s",Option_List[3],aux->answer[0]);
-            
+            printf("*** %c: %s",Option_List[3],aux->answer[0]);   
             break;
-         }
-      
+         } 
       }
-   }  
+   }
    
    player_choice = getc(stdin);
    if (r == 0)
@@ -280,12 +278,19 @@ void game(node*head)
       {
          puts("*** Woops... That's not correct.");
          printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
-
-         
-      }
-         
+      } 
    }
+   // print score and jokers after answer
+   printf("********************************************\n");
+   printf("*** Name:  %-32s*\n", aux_nome);
+   printf("*** Level: %-32s*\n", "temporario lvl");
+   printf("*** j50:   %-32s*\n", "temporario joker 50");
+   printf("*** j25:   %-32s*\n", "temporario joker 25");
+   printf("********************************************\n");
+
+;
 }
+
 
 
 
