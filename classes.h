@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+#ifndef __classes_h__
+#define __classes_h__
 
 typedef struct _node {
    char text[128];
@@ -11,5 +8,6 @@ typedef struct _node {
    struct _node * next;
 } node;
 
+#endif
 
 

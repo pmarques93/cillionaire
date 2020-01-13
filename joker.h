@@ -1,7 +1,6 @@
+#include "game.h"
 
-#include "classes.h"
-
-void joker_50(node*head)
+void joker(node*head)
 {
     node * aux;
     char Option_List[4] = {'A','B','C','D'};
