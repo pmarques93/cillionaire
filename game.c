@@ -8,14 +8,15 @@ void joker(node*, int *);
 char player_choice [100];
 char aux_char;
 int aux_type;
+int joker_50_50 = 1;
 
-void game(node*head, char * aux_nome)
+void game(node*head, char * aux_nome, int*seed)
 {	
     node * aux;
     
     char Option_List[5] = {'A','B','C','D','J'};
     int i = 0;
-    srand(time(0));
+    srand(*seed);
     int r = rand() % 4;
     for (aux = head; aux != NULL; aux = aux -> next, i++)
 {  
@@ -82,6 +83,7 @@ if (r == 0)
             joker(head, &r);
             fgets(player_choice, 100, stdin);
             sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+            joker_50_50 = 0;
             
             if(toupper(aux_char) == Option_List[0])
             {
@@ -116,6 +118,7 @@ else if (r == 1)
     {
         if (aux_type == 50)
         {
+            joker_50_50 = 0;
             joker(head, &r);
             fgets(player_choice, 100, stdin);
             sscanf(player_choice,"%c%d", &aux_char, &aux_type);
@@ -150,6 +153,7 @@ else if (r == 2)
     {
         if (aux_type == 50)
         {
+            joker_50_50 = 0;
             joker(head, &r);
             fgets(player_choice, 100, stdin);
             sscanf(player_choice,"%c%d", &aux_char, &aux_type);
@@ -186,6 +190,7 @@ else if (r == 3)
     {
         if (aux_type == 50)
         {
+            joker_50_50 = 0;
             joker(head, &r);
             fgets(player_choice, 100, stdin);
             sscanf(player_choice,"%c%d", &aux_char, &aux_type);
@@ -225,6 +230,7 @@ void joker(node*head, int *r)
     srand(time(0));
     //  (upper - lower + 1)) + lower; 
     int j = rand() % (3 - 1 + 1) + 1;
+    
     for (aux = head; aux != NULL; aux = aux -> next, i++)
     {
         if (*r == 0)

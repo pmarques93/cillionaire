@@ -4,6 +4,6 @@
 #ifndef __readfile_h__
 #define __readfile_h__
 
-node* readFile();
+node* readFile(char *);
 
 #endif

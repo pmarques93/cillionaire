@@ -3,15 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-node* readFile()
+node* readFile(char * file_name)
 {  
+   
    char line[512];
    node * head = NULL;
    node * tail = NULL;
    node * new;
     
    FILE *in_file;
-   in_file = fopen("questions.txt", "r");
+   
+   
+   in_file = fopen(file_name, "r");
    
    if (in_file == NULL)
    {

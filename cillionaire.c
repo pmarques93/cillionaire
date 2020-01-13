@@ -2,25 +2,26 @@
 #include "classes.h"
 #include "readFile.h"
 #include "game.h"
-
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 
-int seed;
 
 
 
 
-void keyPress()
+
+void keyPress(int *seed)
 {
+   
+   char *file_name[100];
    node* head;
-	head = readFile();
+	head = readFile(file_name[100]);
 	char line [100];
 	char aux_nome [100] = "newbie";
 	char aux_2;
-
 
    while (line[0] != 'q')
    {
@@ -28,9 +29,10 @@ void keyPress()
       switch(line [0])
       {
          case 'n' :  // n, starts game
+            
             sscanf(line,"%c%s", &aux_2, aux_nome);
             printf("*** Hi %s, let's get started!\n", aux_nome);
-            game(head, aux_nome);
+            game(head, aux_nome, seed);
             break;
 
          case 'h' :
@@ -58,11 +60,33 @@ void keyPress()
 
 int main(int argc, char** argv)
 {	
-
-	if (argc > 1)
+   int seed = 0;
+   char file_name[100];
+	if (argc < 1)
 	{
-		seed = atoi(argv[1]);
+      
+	   seed = atoi(argv[1]);
 	}
+   else if (argc == 3)
+   {
+      
+      char new_str1 = strcmp(argv[1],"-s");
+      char new_str2 = strcmp(argv[1],"-f");
+      if (new_str1 == 0)
+      {
+         seed = *argv[2];
+      }
+      if (new_str2 == 0)
+      {
+         strcpy(file_name,argv[2]);
+         puts(file_name);
+      }
+
+
+
+
+
+   }
 	else
 	{
 		seed = time(NULL);
@@ -70,14 +94,9 @@ int main(int argc, char** argv)
 
 	printMenu();
 
-	keyPress();
+	keyPress(&seed);
    return 0;	
 }
-
-
-
-
-
 
 
 
@@ -90,8 +109,6 @@ void printCredits(void)
    puts("***    Pedro M    ***");
    puts("*********************");
 }
-
-
 
 
 void printMenu(void)
