@@ -5,11 +5,14 @@
 #include <ctype.h>
 
 void joker(node*, int *);
+char player_choice [100];
+char aux_char;
+int aux_type;
 
 void game(node*head, char * aux_nome)
 {	
     node * aux;
-    char player_choice;
+    
     char Option_List[5] = {'A','B','C','D','J'};
     int i = 0;
     srand(time(0));
@@ -61,16 +64,20 @@ void game(node*head, char * aux_nome)
     }
 }
 
-player_choice = getc(stdin);
+fgets(player_choice, 100, stdin);
+sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+
 if (r == 0)
 {
    
-    if(toupper(player_choice) == Option_List[0])
+    if(toupper(aux_char) == Option_List[0])
         puts("*** Hooray!");
     
-    else if(toupper(player_choice) == Option_List[4])
-        joker(head, &r);    
-    
+    else if(toupper(aux_char) == Option_List[4])
+    {
+        if (aux_type == 50)
+            joker(head, &r);    
+    }
     else
     {
         puts("*** Woops... That's not correct.");
@@ -81,12 +88,15 @@ if (r == 0)
 
 else if (r == 1)
 {
-    if(toupper(player_choice) == Option_List[1])
+    if(toupper(aux_char) == Option_List[1])
         puts("*** Hooray!");
     
-    else if(toupper(player_choice) == Option_List[4])
-        joker(head, &r);   
-    
+    else if(toupper(aux_char) == Option_List[4])
+    {
+        if (aux_type == 50)
+            joker(head, &r);    
+    }
+
     else
     {
         puts("*** Woops... That's not correct.");
@@ -96,11 +106,14 @@ else if (r == 1)
 
 else if (r == 2)
 {
-    if(toupper(player_choice) == Option_List[2])
+    if(toupper(aux_char) == Option_List[2])
         puts("*** Hooray!");
 
-    else if(toupper(player_choice) == Option_List[4])
-        joker(head, &r);
+    else if(toupper(aux_char) == Option_List[4])
+    {
+        if (aux_type == 50)
+            joker(head, &r);    
+    }
 
     else
     {
@@ -111,11 +124,19 @@ else if (r == 2)
 
 else if (r == 3)
 {
-    if(toupper(player_choice) == Option_List[3])
+    if(toupper(aux_char) == Option_List[3])
+    {    
         puts("*** Hooray!");
-
-    else if(toupper(player_choice) == Option_List[4])
-        joker(head, &r);
+        printScore(aux_nome);
+    }
+    else if(toupper(aux_char) == Option_List[4])
+    {
+        if (aux_type == 50)
+        {
+            joker(head, &r);
+            printScore(aux_nome); 
+        }  
+    }
 
     else
     {
@@ -123,13 +144,8 @@ else if (r == 3)
         printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
     } 
 }
-// print score and jokers after answer
-printf("********************************************\n");
-printf("*** Name:  %-32s*\n", aux_nome);
-printf("*** Level: %-32s*\n", "temporario lvl");
-printf("*** j50:   %-32s*\n", "temporario joker 50");
-printf("*** j25:   %-32s*\n", "temporario joker 25");
-printf("********************************************\n");
+
+
 }
 
 

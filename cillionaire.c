@@ -110,7 +110,15 @@ void printMenu(void)
 	puts("********************************************");
 }
 
-
+void printScore(char *aux_nome)
+{
+   printf("********************************************\n");
+   printf("*** Name:  %-32s*\n", aux_nome);
+   printf("*** Level: %-32s*\n", "temporario lvl");
+   printf("*** j50:   %-32s*\n", "temporario joker 50");
+   printf("*** j25:   %-32s*\n", "temporario joker 25");
+   printf("********************************************\n");
+}
 
 
 

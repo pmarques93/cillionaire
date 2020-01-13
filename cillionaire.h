@@ -8,6 +8,6 @@
 void pressKey(void);
 void printMenu(void);
 void printCredits(void);
-
+void printScore(char * aux_nome);
 #endif
 
