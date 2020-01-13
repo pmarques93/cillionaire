@@ -139,26 +139,51 @@ void joker(node*head, int *r)
     char Option_List[4] = {'A','B','C','D'};
     int i = 0;
     srand(time(0));
-    int j = rand() % (3 + 1 - 1) + 1;
-    
+    //  (upper - lower + 1)) + lower; 
+    int j = rand() % (3 - 1 + 1) + 1;
+    printf("j1 = %d\n", j);
     for (aux = head; aux != NULL; aux = aux -> next, i++)
     {
         if (*r == 0)
         {  
-            
+
             printf("*** Question: %s",aux->text);
             printf("*** %c: %s",Option_List[0],aux->answer[0]);
             printf("*** %c: %s",Option_List[j],aux->answer[j]);  
             break;
         }
         else if (*r == 1)
-        {  
+        {
+            if(j > 1)
+            {
+                printf("*** Question: %s",aux->text);
+                printf("*** %c: %s",Option_List[1],aux->answer[0]);
+                printf("*** %c: %s",Option_List[j],aux->answer[j]);
+                break;
+            }
+
+            if(j < 1)
+            {
+                printf("*** Question: %s",aux->text);
+                printf("*** %c: %s",Option_List[j],aux->answer[j]);
+                printf("*** %c: %s",Option_List[1],aux->answer[0]);
+                break;
+            }
+
+            if(j == 1)
+            {
+                int lista[4] = {0,2,3};
+                int rand_num = (rand() % 2); 
+                j = lista[rand_num];
+                printf("j = %d\n", j);
+            }
             
             printf("*** Question: %s",aux->text);
-            printf("*** %c: %s",Option_List[j],aux->answer[j]);
             printf("*** %c: %s",Option_List[1],aux->answer[0]);
+            printf("*** %c: %s",Option_List[j],aux->answer[j]);
             break;
         }
+
         else if (*r == 2)
         {  
            
