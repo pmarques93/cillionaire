@@ -64,7 +64,7 @@ int main(int argc, char** argv)
    char file_name[100];
 	if (argc < 1)
 	{
-      
+    
 	   seed = atoi(argv[1]);
 	}
    else if (argc == 3)
