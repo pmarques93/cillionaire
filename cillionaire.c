@@ -18,20 +18,21 @@ void keyPress(int *seed)
    
    char *file_name[100];
    node* head;
-	head = readFile(file_name[100]);
 	char line [100];
 	char aux_nome [100] = "newbie";
 	char aux_2;
 
    while (line[0] != 'q')
    {
+      printf(">");
       fgets(line, 100, stdin);
       switch(line [0])
       {
          case 'n' :  // n, starts game
-            
+
+            head = readFile(file_name[100]);
             sscanf(line,"%c%s", &aux_2, aux_nome);
-            printf("*** Hi %s, let's get started!\n", aux_nome);
+            printf(">*** Hi %s, let's get started!\n", aux_nome);
             game(head, aux_nome, seed);
             break;
 
