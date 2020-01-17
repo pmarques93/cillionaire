@@ -2,8 +2,8 @@
 #ifndef __cillionaire_h__
 #define __cillionaire_h__
 
-#define MSG_BYE "*** Sad to see you go..."
-#define MSG_UNKNOWN "*** Unknown option..."
+#define MSG_BYE ">*** Sad to see you go..."
+#define MSG_UNKNOWN ">*** Unknown option..."
 
 void keyPress(int *seed, char * file_name);
 void printMenu(void);
