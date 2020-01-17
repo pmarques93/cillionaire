@@ -10,85 +10,99 @@ char aux_char;
 int aux_type;
 int joker_50_50 = 1;
 
-void game(node*head, char * aux_nome)
+int game(node*head, char * aux_nome)
 {	
     node * aux;
     
-    char Option_List[5] = {'A','B','C','D','J'};
+    char Option_List[6] = {'A','B','C','D','J','Q'};
     int i = 0;
     // srand(seed);
     int r = rand() % 4;
     for (aux = head; aux != NULL; aux = aux -> next, i++)
-{  
+    {  
     
-    if(aux->difficulty >= 0 && aux->difficulty < 3)       
+        if(aux->difficulty >= 0 && aux->difficulty < 3)       
+        {
+            if (r == 0)
+            {  
+                printf("*** Question: %s",aux->text);
+                printf("*** %c: %s",Option_List[0],aux->answer[0]);
+                printf("*** %c: %s",Option_List[1],aux->answer[1]);
+                printf("*** %c: %s",Option_List[2],aux->answer[2]);
+                printf("*** %c: %s",Option_List[3],aux->answer[3]);   
+                break;
+            }
+
+            else if (r == 1)
+            {  
+                printf("*** Question: %s",aux->text);
+                printf("*** %c: %s",Option_List[0],aux->answer[1]);
+                printf("*** %c: %s",Option_List[1],aux->answer[0]);
+                printf("*** %c: %s",Option_List[2],aux->answer[2]);
+                printf("*** %c: %s",Option_List[3],aux->answer[3]);
+                break;
+            }
+
+            else if (r == 2)
+            {
+                printf("*** Question: %s",aux->text);
+                printf("*** %c: %s",Option_List[0],aux->answer[1]);
+                printf("*** %c: %s",Option_List[1],aux->answer[2]);
+                printf("*** %c: %s",Option_List[2],aux->answer[0]);
+                printf("*** %c: %s",Option_List[3],aux->answer[3]);
+                break;
+            }
+
+            else
+            {
+                printf("*** Question: %s",aux->text);
+                printf("*** %c: %s",Option_List[0],aux->answer[1]);
+                printf("*** %c: %s",Option_List[1],aux->answer[2]);
+                printf("*** %c: %s",Option_List[2],aux->answer[3]);
+                printf("*** %c: %s",Option_List[3],aux->answer[0]);   
+                break;
+            } 
+        }
+    }
+
+
+    while (player_choice[0] != 'Q')
     {
+        fgets(player_choice, 100, stdin);
+        sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+        
+        if(toupper(aux_char) == 'Q')  
+                return 1;
+
         if (r == 0)
-        {  
-            printf("*** Question: %s",aux->text);
-            printf("*** %c: %s",Option_List[0],aux->answer[0]);
-            printf("*** %c: %s",Option_List[1],aux->answer[1]);
-            printf("*** %c: %s",Option_List[2],aux->answer[2]);
-            printf("*** %c: %s",Option_List[3],aux->answer[3]);   
-            break;
-        }
-
-        else if (r == 1)
-        {  
-            printf("*** Question: %s",aux->text);
-            printf("*** %c: %s",Option_List[0],aux->answer[1]);
-            printf("*** %c: %s",Option_List[1],aux->answer[0]);
-            printf("*** %c: %s",Option_List[2],aux->answer[2]);
-            printf("*** %c: %s",Option_List[3],aux->answer[3]);
-            break;
-        }
-
-        else if (r == 2)
         {
-            printf("*** Question: %s",aux->text);
-            printf("*** %c: %s",Option_List[0],aux->answer[1]);
-            printf("*** %c: %s",Option_List[1],aux->answer[2]);
-            printf("*** %c: %s",Option_List[2],aux->answer[0]);
-            printf("*** %c: %s",Option_List[3],aux->answer[3]);
-            break;
-        }
-
-        else
-        {
-            printf("*** Question: %s",aux->text);
-            printf("*** %c: %s",Option_List[0],aux->answer[1]);
-            printf("*** %c: %s",Option_List[1],aux->answer[2]);
-            printf("*** %c: %s",Option_List[2],aux->answer[3]);
-            printf("*** %c: %s",Option_List[3],aux->answer[0]);   
-            break;
-        } 
-    }
-}
-
-fgets(player_choice, 100, stdin);
-sscanf(player_choice,"%c%d", &aux_char, &aux_type);
-
-if (r == 0)
-{
-   
-    if(toupper(aux_char) == Option_List[0])
-    {
-        puts("*** Hooray!");
-        printScore(aux_nome);
-    }
-    else if(toupper(aux_char) == Option_List[4])
-    {
-        if (aux_type == 50)
-        {
-            joker(head, &r);
-            fgets(player_choice, 100, stdin);
-            sscanf(player_choice,"%c%d", &aux_char, &aux_type);
-            joker_50_50 = 0;
-            
+        
             if(toupper(aux_char) == Option_List[0])
             {
                 puts("*** Hooray!");
                 printScore(aux_nome);
+            }
+            else if(toupper(aux_char) == Option_List[4])
+            {
+                if (aux_type == 50)
+                {
+                    joker(head, &r);
+                    fgets(player_choice, 100, stdin);
+                    sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+                    joker_50_50 = 0;
+                    
+                    if(toupper(aux_char) == Option_List[0])
+                    {
+                        puts("*** Hooray!");
+                        printScore(aux_nome);
+                    }
+                    else
+                    {
+                        puts("*** Woops... That's not correct.");
+                        printf("*** The correct answer was %c: %s", Option_List[0],aux->answer[0]);
+                    }
+                    
+                }    
             }
             else
             {
@@ -96,128 +110,120 @@ if (r == 0)
                 printf("*** The correct answer was %c: %s", Option_List[0],aux->answer[0]);
             }
             
-        }    
-    }
-    else
-    {
-        puts("*** Woops... That's not correct.");
-        printf("*** The correct answer was %c: %s", Option_List[0],aux->answer[0]);
-    }
-    
-}
+        }
 
-else if (r == 1)
-{
-    if(toupper(aux_char) == Option_List[1])
-    {
-        puts("*** Hooray!");
-        printScore(aux_nome);
-    }
-    
-    else if(toupper(aux_char) == Option_List[4])
-    {
-        if (aux_type == 50)
+        else if (r == 1)
         {
-            joker_50_50 = 0;
-            joker(head, &r);
-            fgets(player_choice, 100, stdin);
-            sscanf(player_choice,"%c%d", &aux_char, &aux_type);
-            
             if(toupper(aux_char) == Option_List[1])
             {
                 puts("*** Hooray!");
                 printScore(aux_nome);
             }
+            
+            else if(toupper(aux_char) == Option_List[4])
+            {
+                if (aux_type == 50)
+                {
+                    joker_50_50 = 0;
+                    joker(head, &r);
+                    fgets(player_choice, 100, stdin);
+                    sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+                    
+                    if(toupper(aux_char) == Option_List[1])
+                    {
+                        puts("*** Hooray!");
+                        printScore(aux_nome);
+                    }
+                    else
+                    {
+                        puts("*** Woops... That's not correct.");
+                        printf("*** The correct answer was %c: %s", Option_List[1],aux->answer[0]);
+                    }
+                    
+                }        
+            }
+
             else
             {
                 puts("*** Woops... That's not correct.");
                 printf("*** The correct answer was %c: %s", Option_List[1],aux->answer[0]);
             }
-            
-        }        
-    }
+        }
 
-    else
-    {
-        puts("*** Woops... That's not correct.");
-        printf("*** The correct answer was %c: %s", Option_List[1],aux->answer[0]);
-    }
-}
-
-else if (r == 2)
-{
-    if(toupper(aux_char) == Option_List[2])
-        puts("*** Hooray!");
-
-    else if(toupper(aux_char) == Option_List[4])
-    {
-        if (aux_type == 50)
+        else if (r == 2)
         {
-            joker_50_50 = 0;
-            joker(head, &r);
-            fgets(player_choice, 100, stdin);
-            sscanf(player_choice,"%c%d", &aux_char, &aux_type);
-            
             if(toupper(aux_char) == Option_List[2])
-            {
                 puts("*** Hooray!");
-                printScore(aux_nome);
+
+            else if(toupper(aux_char) == Option_List[4])
+            {
+                if (aux_type == 50)
+                {
+                    joker_50_50 = 0;
+                    joker(head, &r);
+                    fgets(player_choice, 100, stdin);
+                    sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+                    
+                    if(toupper(aux_char) == Option_List[2])
+                    {
+                        puts("*** Hooray!");
+                        printScore(aux_nome);
+                    }
+                    else
+                    {
+                        puts("*** Woops... That's not correct.");
+                        printf("*** The correct answer was %c: %s", Option_List[2],aux->answer[0]);
+                    }
+                    
+                }    
             }
+
             else
             {
                 puts("*** Woops... That's not correct.");
                 printf("*** The correct answer was %c: %s", Option_List[2],aux->answer[0]);
             }
-            
-        }    
-    }
+        }
 
-    else
-    {
-        puts("*** Woops... That's not correct.");
-        printf("*** The correct answer was %c: %s", Option_List[2],aux->answer[0]);
-    }
-}
-
-else if (r == 3)
-{
-    if(toupper(aux_char) == Option_List[3])
-    {    
-        puts("*** Hooray!");
-        printScore(aux_nome);
-    }
-    else if(toupper(aux_char) == Option_List[4])
-    {
-        if (aux_type == 50)
+        else if (r == 3)
         {
-            joker_50_50 = 0;
-            joker(head, &r);
-            fgets(player_choice, 100, stdin);
-            sscanf(player_choice,"%c%d", &aux_char, &aux_type);
-            
             if(toupper(aux_char) == Option_List[3])
-            {
+            {    
                 puts("*** Hooray!");
                 printScore(aux_nome);
             }
+            else if(toupper(aux_char) == Option_List[4])
+            {
+                if (aux_type == 50)
+                {
+                    joker_50_50 = 0;
+                    joker(head, &r);
+                    fgets(player_choice, 100, stdin);
+                    sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+                    
+                    if(toupper(aux_char) == Option_List[3])
+                    {
+                        puts("*** Hooray!");
+                        printScore(aux_nome);
+                    }
+                    else
+                    {
+                        puts("*** Woops... That's not correct.");
+                        printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
+                    }
+                    
+                }
+            }
+
             else
             {
                 puts("*** Woops... That's not correct.");
                 printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
-            }
-            
+                printScore(aux_nome); 
+
+            } 
         }
     }
-
-    else
-    {
-        puts("*** Woops... That's not correct.");
-        printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
-        printScore(aux_nome); 
-
-    } 
-}
-
 
 }
 

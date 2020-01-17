@@ -26,8 +26,17 @@ void keyPress(char * file_name)
 
             head = readFile(file_name);
             sscanf(line,"%c%s", &aux_2, aux_nome);
-            printf(">*** Hi %s, let's get started!\n", aux_nome);
+
+
+            printf("*** Hi %s, let's get started!\n", aux_nome);
+            printScore(aux_nome);
             game(head, aux_nome);
+            if(game(head, aux_nome) == 1)
+               line[0] = 'q';
+
+            // line[0] = 'q';
+            printf(">");
+
             break;
 
          case 'h' :
@@ -49,7 +58,7 @@ void keyPress(char * file_name)
             puts(MSG_UNKNOWN);
       }
    }
-   puts(MSG_BYE);
+   puts("*** Sad to see you go...");
 }
 
 
@@ -170,9 +179,9 @@ void printScore(char *aux_nome)
 {
    printf("********************************************\n");
    printf("*** Name:  %-32s*\n", aux_nome);
-   printf("*** Level: %-32s*\n", "temporario lvl");
-   printf("*** j50:   %-32s*\n", "temporario joker 50");
-   printf("*** j25:   %-32s*\n", "temporario joker 25");
+   printf("*** Level: %-32s*\n", "0");
+   printf("*** j50:   %-32s*\n", "YES");
+   printf("*** j25:   %-32s*\n", "YES");
    printf("********************************************\n");
 }
 
