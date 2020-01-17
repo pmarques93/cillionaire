@@ -8,7 +8,7 @@
 #include <time.h>
 
 
-void keyPress(int *seed, char * file_name)
+void keyPress(char * file_name)
 {
    
    node* head;
@@ -27,7 +27,7 @@ void keyPress(int *seed, char * file_name)
             head = readFile(file_name);
             sscanf(line,"%c%s", &aux_2, aux_nome);
             printf(">*** Hi %s, let's get started!\n", aux_nome);
-            game(head, aux_nome, seed);
+            game(head, aux_nome);
             break;
 
          case 'h' :
@@ -131,9 +131,9 @@ int main(int argc, char** argv)
    // printf("file name is: %s\n", file_name);
    // printf("seed is: %d\n", seed);
    // printf("argc: %d\n", argc);
+   srand(seed);
 	printMenu();
-
-	keyPress(&seed, file_name);
+	keyPress(file_name);
    return 0;	
 }
 

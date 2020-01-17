@@ -10,13 +10,13 @@ char aux_char;
 int aux_type;
 int joker_50_50 = 1;
 
-void game(node*head, char * aux_nome, int*seed)
+void game(node*head, char * aux_nome)
 {	
     node * aux;
     
     char Option_List[5] = {'A','B','C','D','J'};
     int i = 0;
-    srand(*seed);
+    // srand(seed);
     int r = rand() % 4;
     for (aux = head; aux != NULL; aux = aux -> next, i++)
 {  
