@@ -8,15 +8,9 @@
 #include <time.h>
 
 
-
-
-
-
-
-void keyPress(int *seed)
+void keyPress(int *seed, char * file_name)
 {
    
-   char *file_name[100];
    node* head;
 	char line [100];
 	char aux_nome [100] = "newbie";
@@ -30,7 +24,7 @@ void keyPress(int *seed)
       {
          case 'n' :  // n, starts game
 
-            head = readFile(file_name[100]);
+            head = readFile(file_name);
             sscanf(line,"%c%s", &aux_2, aux_nome);
             printf(">*** Hi %s, let's get started!\n", aux_nome);
             game(head, aux_nome, seed);
@@ -62,40 +56,84 @@ void keyPress(int *seed)
 int main(int argc, char** argv)
 {	
    int seed = 0;
-   char file_name[100];
-	if (argc < 1)
-	{
-    
-	   seed = atoi(argv[1]);
-	}
-   else if (argc == 3)
+   char * file_name;
+   int i;
+   
+   if (argc == 3)
    {
       
       char new_str1 = strcmp(argv[1],"-s");
       char new_str2 = strcmp(argv[1],"-f");
-      if (new_str1 == 0)
+      // char new_str3 = strcmp(argv[3],"-s");
+      
+      if (new_str1 == 0 )
       {
          seed = *argv[2];
       }
-      if (new_str2 == 0)
+
+      else if (new_str2 == 0)
       {
-         strcpy(file_name,argv[2]);
-         puts(file_name);
+         int str_len = strlen(argv[2]);
+         file_name = malloc(str_len);
+         for (i=2; i<3; i++) 
+         {
+            strcat(file_name, argv[i]);
+            if (3 > i+1)
+               strcat(file_name, " ");
+         }
+      }
+   }
+   else if (argc == 5)
+   {
+      char new_str1 = strcmp(argv[1],"-s");
+      char new_str2 = strcmp(argv[1],"-f");
+      // char new_str3 = strcmp(argv[3],"-s");
+      char new_str4 = strcmp(argv[3],"-f");
+      if (new_str1 == 0)
+      {
+         seed = *argv[2];
+
+         if(new_str4 == 0)
+         {
+            int str_len = strlen(argv[4]);
+            file_name = malloc(str_len);
+            for (i=4; i<5; i++) 
+            {
+               strcat(file_name, argv[i]);
+               if (5 > i+1)
+                  strcat(file_name, " ");
+            }
+
+         }
+
       }
 
+      else if (new_str2 == 0)
+      {
+         seed = *argv[4];
 
-
-
-
+         int str_len = strlen(argv[2]);
+         file_name = malloc(str_len);
+         for (i=2; i<3; i++) 
+         {
+            strcat(file_name, argv[i]);
+            if (3 > i+1)
+               strcat(file_name, " ");
+         }
+      }
    }
+
+   
 	else
 	{
 		seed = time(NULL);
 	}
-
+   // printf("file name is: %s\n", file_name);
+   // printf("seed is: %d\n", seed);
+   // printf("argc: %d\n", argc);
 	printMenu();
 
-	keyPress(&seed);
+	keyPress(&seed, file_name);
    return 0;	
 }
 
