@@ -150,7 +150,7 @@ node* game(node*head, char * aux_nome)
             if(toupper(aux_char) == Option_List[1])
             {
                 puts(">*** Hooray!");
-                 fail = 0;
+                fail = 0;
                 
                 level += 1;
                 
@@ -202,7 +202,7 @@ node* game(node*head, char * aux_nome)
             if(toupper(aux_char) == Option_List[2])
             {
                 puts(">*** Hooray!");
-                 fail = 0;
+                fail = 0;
                 level += 1;
             }
             else if(toupper(aux_char) == Option_List[4])
@@ -318,87 +318,76 @@ void joker50(node*aux, int *r)
 {
     aux = aux->next;
     char Option_List[4] = {'A','B','C','D'};
+    joker_50_50 = 0;
     
-    
-    
-    int j = rand() % (3 - 1 + 1) + 1;
-    
-    
-       if(aux->difficulty == 0)
-       {
+    int j = rand() % (1) + 1;
+    //printf("%d",j);
+    //printf("%d", *r);
+    if (*r == 0)
+    {  
+
+        printf(">*** Question: %s",aux->text);
+        printf("*** %c: %s",Option_List[0],aux->answer[0]);
+        printf("*** %c: %s",Option_List[j],aux->answer[j]);  
         
-            if (*r == 0)
-            {  
-
-                printf("*** Question: %s",aux->text);
-                printf("*** %c: %s",Option_List[0],aux->answer[0]);
-                printf("*** %c: %s",Option_List[j],aux->answer[j]);  
-                
-            }
-            else if (*r == 1)
-            {
-               
-                if(j >= 1)
-                {
-                    printf("*** Question: %s",aux->text);
-                    printf("*** %c: %s",Option_List[1],aux->answer[0]);
-                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
-                   
-                }
-                else if(j < 1)
-                {
-                    printf("*** Question: %s",aux->text);
-                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
-                    printf("*** %c: %s",Option_List[1],aux->answer[0]);
-                    
-                }
-            }
-            else if (*r == 2)
-            {
-                if(j > 2)
-                {
-                    printf("*** Question: %s",aux->text);
-                    printf("*** %c: %s",Option_List[2],aux->answer[0]);
-                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
-                    
-                }
-
-                else if(j < 2)
-                {
-                    printf("*** Question: %s",aux->text);
-                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
-                    printf("*** %c: %s",Option_List[2],aux->answer[0]);
-                    
-                }
-
-                
-                
-            }
-            else if (*r == 3)
-            {
-                if(j == 3)
-                {
-                    j = rand() % 3;
-                    printf("*** Question: %s",aux->text);
-                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
-                    printf("*** %c: %s",Option_List[3],aux->answer[0]);
-                    
-                }
-
-                else if(j < 3)
-                {
-                    printf("*** Question: %s",aux->text);
-                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
-                    printf("*** %c: %s",Option_List[3],aux->answer[0]);
-                    
-                }
-                        
-            }
-
-                
+    }
+    else if (*r == 1)
+    {
+        
+        if(j >= 1)
+        {
+            printf(">*** Question: %s",aux->text);
+            printf("*** %c: %s",Option_List[0],aux->answer[j]);
+            printf("*** %c: %s",Option_List[1],aux->answer[0]);
+            
         }
+        else if(j < 1)
+        {
+            printf(">*** Question: %s",aux->text);
+            printf("*** %c: %s",Option_List[1],aux->answer[0]);
+            printf("*** %c: %s",Option_List[0],aux->answer[j]);
+            
+        }
+    }
+    else if (*r == 2)
+    {
+        if(j > 2)
+        {
+            printf(">*** Question: %s",aux->text);
+            printf("*** %c: %s",Option_List[2],aux->answer[0]);
+            printf("*** %c: %s",Option_List[1],aux->answer[j]);
+            
+        }
+
+        else if(j < 2)
+        {
+            printf(">*** Question: %s",aux->text);
+            printf("*** %c: %s",Option_List[1],aux->answer[j]);
+            printf("*** %c: %s",Option_List[2],aux->answer[0]);
+            
+        }
+
         
-    
+        
+    }
+    else if (*r == 3)
+    {
+        if(j == 3)
+        {
+            printf(">*** Question: %s",aux->text);
+            printf("*** %c: %s",Option_List[1],aux->answer[j]);
+            printf("*** %c: %s",Option_List[3],aux->answer[0]);
+            
+        }
+
+        else if(j < 3)
+        {
+            printf(">*** Question: %s",aux->text);
+            printf("*** %c: %s",Option_List[1],aux->answer[j]);
+            printf("*** %c: %s",Option_List[3],aux->answer[0]);
+            
+        }         
+    }         
 }
 
 //void joker25(node*head, int *r)
@@ -429,7 +418,7 @@ unsigned int level_check (node* aux,int level)
         difficulty = 1;
     }
         
-    else
+    else if (level >= 5)
     {
         aux->difficulty = 2;
         difficulty = 2;
