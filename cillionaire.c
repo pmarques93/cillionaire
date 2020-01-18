@@ -28,13 +28,7 @@ void keyPress(char * file_name)
             sscanf(line,"%c%s", &aux_2, aux_nome);
             printf("*** Hi %s, let's get started!\n", aux_nome);
             printScore(aux_nome);
-            game(head, aux_nome);
-            if (game(head, aux_nome) == 0)
-            {
-               puts("*** Sad to see you go...");
-               break;
-            }
-            
+            game(head, aux_nome);   
             break;
 
          case 'h' :

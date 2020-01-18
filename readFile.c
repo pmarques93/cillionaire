@@ -46,13 +46,14 @@ node* readFile(char * file_name)
       fgets(line, 512, in_file); // ler CATEGORY
       
       fgets(line, 512, in_file); // ler DIFFICULTY
+      
       if (strcmp(line, "DIFFICULTY=easy\n") == 0)
-         new->difficulty = easy;
-      else if(strcmp(line, "DIFFICULTY=medium\n") == 1)
-         new->difficulty = medium;
-      else
-        new->difficulty = hard;
-
+         new->difficulty = 0;
+      else if(strcmp(line, "DIFFICULTY=medium\n") == 0)
+         new->difficulty = 1;
+      else if(strcmp(line, "DIFFICULTY=hard\n") == 0)
+        new->difficulty = 2;
+      printf("%d", new->difficulty);   
 
       if (head == NULL)
       {
