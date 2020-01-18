@@ -285,7 +285,7 @@ node* game(node*head, char * aux_nome)
         aux = head -> next;
         head -> next = aux -> next;
         free(aux);
-         aux -> next = game(head->next, aux_nome);
+        aux -> next = game(head->next, aux_nome);
         return head;
         
     }
@@ -397,11 +397,12 @@ unsigned int level_check (node* aux,int level)
     unsigned int difficulty;
     if (level < 3)
     {
-        difficulty = 0;
         aux->difficulty = 0;
+        difficulty = 0;
+
     }
         
-    else if ( level > 3 && level < 5)
+    else if ( level > 2 && level < 5)
     {
         aux ->difficulty = 1;
         difficulty = 1;
