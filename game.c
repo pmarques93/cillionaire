@@ -28,7 +28,7 @@ node* game(node*head, char * aux_nome)
         puts("*** Sorry, you have lost the game. Bye!");
         exit(0);
     }  
-    char Option_List[6] = {'A','B','C','D','J','Q'};
+    char Option_List[7] = {'A','B','C','D','J','Q','S'};
     int i = 0;
     int r = rand() % 4;
     
@@ -96,7 +96,11 @@ node* game(node*head, char * aux_nome)
         }
         if (r == 0)
         {
-            
+            if(toupper(aux_char) == Option_List[6])
+            {
+                puts(">*** Ok, your progress has been saved. See you later!");
+                exit(0);
+            }
             if(toupper(aux_char) == Option_List[0])
             {
                 puts(">*** Hooray!");
@@ -113,6 +117,12 @@ node* game(node*head, char * aux_nome)
                     joker50(head, &r);
                     fgets(player_choice, 100, stdin);
                     sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+
+                    if(toupper(aux_char) == Option_List[6])
+                    {
+                        puts(">*** Ok, your progress has been saved. See you later!");
+                        exit(0);
+                    }
                     
                     if(toupper(aux_char) == Option_List[5])
                     {
@@ -126,13 +136,18 @@ node* game(node*head, char * aux_nome)
                         level += 1;
                         
                     }
-                    else
+                    else if(toupper(aux_char) == Option_List[1])
                     {
                         puts(">*** Woops... That's not correct.");
                         printf("*** The correct answer was %c: %s", Option_List[0],aux->answer[0]);
                         fail +=1;
                     }
-                    
+                    else
+                    {
+                        puts(">*** Illegal move");
+                        puts(">*** Sad to see you go...");
+                        exit(0);
+                    }
                 }    
             }
             
@@ -147,6 +162,11 @@ node* game(node*head, char * aux_nome)
 
         else if (r == 1)
         {   
+            if(toupper(aux_char) == Option_List[6])
+            {
+                puts(">*** Ok, your progress has been saved. See you later!");
+                exit(0);
+            }
             if(toupper(aux_char) == Option_List[1])
             {
                 puts(">*** Hooray!");
@@ -164,6 +184,12 @@ node* game(node*head, char * aux_nome)
                     joker50(head, &r);
                     fgets(player_choice, 100, stdin);
                     sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+
+                    if(toupper(aux_char) == Option_List[6])
+                    {
+                        puts(">*** Ok, your progress has been saved. See you later!");
+                        exit(0);
+                    }
                     
                     if(toupper(aux_char) == Option_List[5])
                     {
@@ -176,12 +202,18 @@ node* game(node*head, char * aux_nome)
                         fail = 0;
                         level += 1;
                     }
-                    else
+                    else if(toupper(aux_char) == Option_List[0])
                     {
                         puts(">*** Woops... That's not correct.");
                         printf("*** The correct answer was %c: %s", Option_List[1],aux->answer[0]);
                         fail +=1;
                         level -= 1;
+                    }
+                    else
+                    {
+                        puts(">*** Illegal move");
+                        puts(">*** Sad to see you go...");
+                        exit(0);
                     }
                     
                 }        
@@ -198,7 +230,12 @@ node* game(node*head, char * aux_nome)
 
         else if (r == 2)
         {   
-            
+            if(toupper(aux_char) == Option_List[6])
+            {
+                puts(">*** Ok, your progress has been saved. See you later!");
+                exit(0);
+            }
+
             if(toupper(aux_char) == Option_List[2])
             {
                 puts(">*** Hooray!");
@@ -213,6 +250,12 @@ node* game(node*head, char * aux_nome)
                     joker50(head, &r);
                     fgets(player_choice, 100, stdin);
                     sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+
+                    if(toupper(aux_char) == Option_List[6])
+                    {
+                        puts(">*** Ok, your progress has been saved. See you later!");
+                        exit(0);
+                    }
                     
                     if(toupper(aux_char) == Option_List[5])
                     {
@@ -225,14 +268,19 @@ node* game(node*head, char * aux_nome)
                          fail = 0;
                         level += 1;
                     }
-                    else
+                    else if (toupper(aux_char) == Option_List[1])
                     {
                         puts(">*** Woops... That's not correct.");
                         printf("*** The correct answer was %c: %s", Option_List[2],aux->answer[0]);
                         level -= 1;
                         fail +=1;
                     }
-                    
+                    else
+                    {
+                        puts(">*** Illegal move");
+                        puts(">*** Sad to see you go...");
+                        exit(0);
+                    }
                 }    
             }
 
@@ -247,6 +295,12 @@ node* game(node*head, char * aux_nome)
 
         else if (r == 3)
         {
+            if(toupper(aux_char) == Option_List[6])
+            {
+                puts(">*** Ok, your progress has been saved. See you later!");
+                exit(0);
+            }
+
             if(toupper(aux_char) == Option_List[3])
             {    
                 puts(">*** Hooray!");
@@ -261,6 +315,13 @@ node* game(node*head, char * aux_nome)
                     joker50(head, &r);
                     fgets(player_choice, 100, stdin);
                     sscanf(player_choice,"%c%d", &aux_char, &aux_type);
+
+                    if(toupper(aux_char) == Option_List[6])
+                    {
+                        puts(">*** Ok, your progress has been saved. See you later!");
+                        exit(0);
+                    }
+
                     if(toupper(aux_char) == Option_List[5])
                     {
                         puts(">*** Sad to see you go...");
@@ -272,7 +333,7 @@ node* game(node*head, char * aux_nome)
                         fail = 0;
                         level += 1;
                     }
-                    else
+                    else if(toupper(aux_char) == Option_List[1])
                     {
                     puts(">*** Woops... That's not correct.");
                         printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
@@ -280,7 +341,12 @@ node* game(node*head, char * aux_nome)
                         fail +=1;
                         
                     }
-                    
+                    else
+                    {
+                        puts(">*** Illegal move");
+                        puts(">*** Sad to see you go...");
+                        exit(0);
+                    }
                 }
             }
 
@@ -328,7 +394,7 @@ void joker50(node*aux, int *r)
 
         printf(">*** Question: %s",aux->text);
         printf("*** %c: %s",Option_List[0],aux->answer[0]);
-        printf("*** %c: %s",Option_List[j],aux->answer[j]);  
+        printf("*** %c: %s",Option_List[1],aux->answer[1]);  
         
     }
     else if (*r == 1)
@@ -389,6 +455,8 @@ void joker50(node*aux, int *r)
         }         
     }         
 }
+
+
 
 //void joker25(node*head, int *r)
 //{
