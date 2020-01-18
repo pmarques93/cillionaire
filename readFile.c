@@ -53,8 +53,7 @@ node* readFile(char * file_name)
          new->difficulty = 1;
       else if(strcmp(line, "DIFFICULTY=hard\n") == 0)
         new->difficulty = 2;
-      printf("%d", new->difficulty);   
-
+      
       if (head == NULL)
       {
          head = new;

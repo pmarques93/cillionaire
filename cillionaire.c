@@ -68,7 +68,7 @@ int main(int argc, char** argv)
       
       if (new_str1 == 0 )
       {
-         seed = *argv[2];
+         seed = atoi(argv[2]);
       }
 
       else if (new_str2 == 0)
@@ -91,7 +91,7 @@ int main(int argc, char** argv)
       char new_str4 = strcmp(argv[3],"-f");
       if (new_str1 == 0)
       {
-         seed = *argv[2];
+         seed = atoi(argv[2]);
 
          if(new_str4 == 0)
          {
@@ -110,7 +110,7 @@ int main(int argc, char** argv)
 
       else if (new_str2 == 0)
       {
-         seed = *argv[4];
+         seed = atoi(argv[4]);
 
          int str_len = strlen(argv[2]);
          file_name = malloc(str_len);
