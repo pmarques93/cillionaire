@@ -18,7 +18,7 @@ void keyPress(char * file_name)
 
    while (line[0] != 'q')
    {
-      printf(">");
+      
       fgets(line, 100, stdin);
       switch(line [0])
       {
@@ -26,17 +26,15 @@ void keyPress(char * file_name)
 
             head = readFile(file_name);
             sscanf(line,"%c%s", &aux_2, aux_nome);
-
-
             printf("*** Hi %s, let's get started!\n", aux_nome);
             printScore(aux_nome);
             game(head, aux_nome);
-            if(game(head, aux_nome) == 1)
-               line[0] = 'q';
-
-            // line[0] = 'q';
-            printf(">");
-
+            if (game(head, aux_nome) == 0)
+            {
+               puts("*** Sad to see you go...");
+               break;
+            }
+            
             break;
 
          case 'h' :
@@ -47,7 +45,8 @@ void keyPress(char * file_name)
             printCredits();
             break;
 
-         case 'q' :  // q, quits the program
+         case 'q' :
+            // q, quits the program
             break;
 
          case '\n' :
@@ -58,22 +57,20 @@ void keyPress(char * file_name)
             puts(MSG_UNKNOWN);
       }
    }
-   puts("*** Sad to see you go...");
+   puts(MSG_BYE);
 }
 
 
 int main(int argc, char** argv)
 {	
-   int seed = 0;
+   int seed;
    char * file_name;
    int i;
-   
    if (argc == 3)
    {
       
       char new_str1 = strcmp(argv[1],"-s");
       char new_str2 = strcmp(argv[1],"-f");
-      // char new_str3 = strcmp(argv[3],"-s");
       
       if (new_str1 == 0 )
       {
@@ -82,6 +79,7 @@ int main(int argc, char** argv)
 
       else if (new_str2 == 0)
       {
+         seed = time(0);
          int str_len = strlen(argv[2]);
          file_name = malloc(str_len);
          for (i=2; i<3; i++) 
@@ -96,7 +94,6 @@ int main(int argc, char** argv)
    {
       char new_str1 = strcmp(argv[1],"-s");
       char new_str2 = strcmp(argv[1],"-f");
-      // char new_str3 = strcmp(argv[3],"-s");
       char new_str4 = strcmp(argv[3],"-f");
       if (new_str1 == 0)
       {
@@ -132,14 +129,6 @@ int main(int argc, char** argv)
       }
    }
 
-   
-	else
-	{
-		seed = time(NULL);
-	}
-   // printf("file name is: %s\n", file_name);
-   // printf("seed is: %d\n", seed);
-   // printf("argc: %d\n", argc);
    srand(seed);
 	printMenu();
 	keyPress(file_name);
@@ -173,6 +162,7 @@ void printMenu(void)
 	puts("*** j 25         - play 25:75 joker        *");
 	puts("*** c            - show credits            *");
 	puts("********************************************");
+   printf(">");
 }
 
 void printScore(char *aux_nome)

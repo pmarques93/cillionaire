@@ -16,14 +16,15 @@ int game(node*head, char * aux_nome)
     
     char Option_List[6] = {'A','B','C','D','J','Q'};
     int i = 0;
-    // srand(seed);
-    int r = rand() % 4;
+    int r = rand() % (4 - 1 + 1) + 1
+
+;
     for (aux = head; aux != NULL; aux = aux -> next, i++)
     {  
     
-        if(aux->difficulty >= 0 && aux->difficulty < 3)       
+        if(aux->difficulty == 0)       
         {
-            if (r == 0)
+            if (r == 1)
             {  
                 printf("*** Question: %s",aux->text);
                 printf("*** %c: %s",Option_List[0],aux->answer[0]);
@@ -33,7 +34,7 @@ int game(node*head, char * aux_nome)
                 break;
             }
 
-            else if (r == 1)
+            else if (r == 2)
             {  
                 printf("*** Question: %s",aux->text);
                 printf("*** %c: %s",Option_List[0],aux->answer[1]);
@@ -43,7 +44,7 @@ int game(node*head, char * aux_nome)
                 break;
             }
 
-            else if (r == 2)
+            else if (r == 3)
             {
                 printf("*** Question: %s",aux->text);
                 printf("*** %c: %s",Option_List[0],aux->answer[1]);
@@ -66,21 +67,23 @@ int game(node*head, char * aux_nome)
     }
 
 
-    while (player_choice[0] != 'Q')
-    {
         fgets(player_choice, 100, stdin);
         sscanf(player_choice,"%c%d", &aux_char, &aux_type);
         
-        if(toupper(aux_char) == 'Q')  
-                return 1;
-
+        
+        if(toupper(aux_char) == Option_List[5])
+            {
+                puts(">*** Sad to see you go...");
+                exit(0);
+            }
         if (r == 0)
         {
-        
+            
             if(toupper(aux_char) == Option_List[0])
             {
                 puts("*** Hooray!");
                 printScore(aux_nome);
+            
             }
             else if(toupper(aux_char) == Option_List[4])
             {
@@ -90,11 +93,16 @@ int game(node*head, char * aux_nome)
                     fgets(player_choice, 100, stdin);
                     sscanf(player_choice,"%c%d", &aux_char, &aux_type);
                     joker_50_50 = 0;
-                    
-                    if(toupper(aux_char) == Option_List[0])
+                    if(toupper(aux_char) == Option_List[5])
+                    {
+                        puts(">*** Sad to see you go...");
+                        exit(0);
+                    }
+                    else if(toupper(aux_char) == Option_List[0])
                     {
                         puts("*** Hooray!");
                         printScore(aux_nome);
+                        return 0;
                     }
                     else
                     {
@@ -104,6 +112,7 @@ int game(node*head, char * aux_nome)
                     
                 }    
             }
+            
             else
             {
                 puts("*** Woops... That's not correct.");
@@ -113,7 +122,7 @@ int game(node*head, char * aux_nome)
         }
 
         else if (r == 1)
-        {
+        {   
             if(toupper(aux_char) == Option_List[1])
             {
                 puts("*** Hooray!");
@@ -129,7 +138,12 @@ int game(node*head, char * aux_nome)
                     fgets(player_choice, 100, stdin);
                     sscanf(player_choice,"%c%d", &aux_char, &aux_type);
                     
-                    if(toupper(aux_char) == Option_List[1])
+                    if(toupper(aux_char) == Option_List[5])
+                    {
+                        puts(">*** Sad to see you go...");
+                        exit(0);
+                    }
+                    else if(toupper(aux_char) == Option_List[1])
                     {
                         puts("*** Hooray!");
                         printScore(aux_nome);
@@ -151,7 +165,8 @@ int game(node*head, char * aux_nome)
         }
 
         else if (r == 2)
-        {
+        {   
+            
             if(toupper(aux_char) == Option_List[2])
                 puts("*** Hooray!");
 
@@ -164,6 +179,11 @@ int game(node*head, char * aux_nome)
                     fgets(player_choice, 100, stdin);
                     sscanf(player_choice,"%c%d", &aux_char, &aux_type);
                     
+                    if(toupper(aux_char) == Option_List[5])
+                    {
+                        puts(">*** Sad to see you go...");
+                        exit(0);
+                    }
                     if(toupper(aux_char) == Option_List[2])
                     {
                         puts("*** Hooray!");
@@ -187,6 +207,8 @@ int game(node*head, char * aux_nome)
 
         else if (r == 3)
         {
+            
+            
             if(toupper(aux_char) == Option_List[3])
             {    
                 puts("*** Hooray!");
@@ -200,8 +222,12 @@ int game(node*head, char * aux_nome)
                     joker(head, &r);
                     fgets(player_choice, 100, stdin);
                     sscanf(player_choice,"%c%d", &aux_char, &aux_type);
-                    
-                    if(toupper(aux_char) == Option_List[3])
+                    if(toupper(aux_char) == Option_List[5])
+                    {
+                        puts(">*** Sad to see you go...");
+                        exit(0);
+                    }
+                    else if(toupper(aux_char) == Option_List[3])
                     {
                         puts("*** Hooray!");
                         printScore(aux_nome);
@@ -210,6 +236,7 @@ int game(node*head, char * aux_nome)
                     {
                         puts("*** Woops... That's not correct.");
                         printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
+                        printScore(aux_nome); 
                     }
                     
                 }
@@ -223,8 +250,9 @@ int game(node*head, char * aux_nome)
 
             } 
         }
-    }
-
+    
+    
+    return 1;    
 }
 
 
@@ -233,51 +261,81 @@ void joker(node*head, int *r)
     node * aux;
     char Option_List[4] = {'A','B','C','D'};
     int i = 0;
-    srand(time(0));
+   
     //  (upper - lower + 1)) + lower; 
     int j = rand() % (3 - 1 + 1) + 1;
-    
+    printf("%d", j);
     for (aux = head; aux != NULL; aux = aux -> next, i++)
     {
-        if (*r == 0)
-        {  
+       if(aux->difficulty == 0)
+       {
+            if (*r == 0)
+            {  
 
-            printf("*** Question: %s",aux->text);
-            printf("*** %c: %s",Option_List[0],aux->answer[0]);
-            printf("*** %c: %s",Option_List[j],aux->answer[j]);  
-            break;
-        }
-        else if (*r == 1)
-        {
-            if(j > 1)
-            {
                 printf("*** Question: %s",aux->text);
-                printf("*** %c: %s",Option_List[1],aux->answer[0]);
-                printf("*** %c: %s",Option_List[j],aux->answer[j]);
+                printf("*** %c: %s",Option_List[0],aux->answer[0]);
+                printf("*** %c: %s",Option_List[j],aux->answer[j]);  
                 break;
             }
-
-            if(j < 1)
+            else if (*r == 1)
             {
-                printf("*** Question: %s",aux->text);
-                printf("*** %c: %s",Option_List[j],aux->answer[j]);
-                printf("*** %c: %s",Option_List[1],aux->answer[0]);
-                break;
-            }
+                if(j >= 1)
+                {
+                    printf("*** Question: %s",aux->text);
+                    printf("*** %c: %s",Option_List[1],aux->answer[0]);
+                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
+                    break;
+                }
 
-            if(j == 1)
-            {
-                int lista[4] = {0,2,3};
-                int rand_num = (rand() % 2); 
-                j = lista[rand_num];
-                printf("j = %d\n", j);
+                else if(j < 1)
+                {
+                    printf("*** Question: %s",aux->text);
+                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
+                    printf("*** %c: %s",Option_List[1],aux->answer[0]);
+                    break;
+                }
             }
-            
-            printf("*** Question: %s",aux->text);
-            printf("*** %c: %s",Option_List[1],aux->answer[0]);
-            printf("*** %c: %s",Option_List[j],aux->answer[j]);
-            break;
+            else if (*r == 2)
+            {
+                if(j > 2)
+                {
+                    printf("*** Question: %s",aux->text);
+                    printf("*** %c: %s",Option_List[2],aux->answer[0]);
+                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
+                    break;
+                }
+
+                else if(j < 2)
+                {
+                    printf("*** Question: %s",aux->text);
+                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
+                    printf("*** %c: %s",Option_List[2],aux->answer[0]);
+                    break;
+                }
+
+                
+                
+            }
+            else if (*r == 3)
+            {
+                if(j == 3)
+                {
+                    j = rand() % 3;
+                    printf("*** Question: %s",aux->text);
+                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
+                    printf("*** %c: %s",Option_List[3],aux->answer[0]);
+                    break;
+                }
+
+                else if(j < 3)
+                {
+                    printf("*** Question: %s",aux->text);
+                    printf("*** %c: %s",Option_List[j],aux->answer[j]);
+                    printf("*** %c: %s",Option_List[3],aux->answer[0]);
+                    break;
+                }
+                        
+            }
         }
-
     }
 }
