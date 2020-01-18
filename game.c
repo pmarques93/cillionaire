@@ -418,11 +418,16 @@ unsigned int level_check (node* aux,int level)
     unsigned int difficulty;
     if (level < 3)
     {
-        difficulty = 0;
         aux->difficulty = 0;
+        difficulty = 0;
+
     }
         
+<<<<<<< HEAD
     else if ( level >= 3 && level < 5)
+=======
+    else if ( level > 2 && level < 5)
+>>>>>>> 9fb8635d08b9787a7bc0bf48d176cc1f57a0e0e2
     {
 
         aux ->difficulty = 1;
