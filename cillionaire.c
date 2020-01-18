@@ -13,7 +13,7 @@ void keyPress(char * file_name)
    
    node* head;
 	char line [100];
-	char aux_nome [100] = "newbie";
+	char aux_nome [100] = "Newbie";
 	char aux_2;
 
    while (line[0] != 'q')
