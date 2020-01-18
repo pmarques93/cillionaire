@@ -451,18 +451,15 @@ void printScore(char *aux_nome, int level, int joker_50_50)
     }
     else if ( level == 6)
     {
-        level_title  = 200000;
+        level_title  = 20000;
     }
     else if ( level == 7)
     {
-        level_title  = 500000;
+        level_title  = 50000;
     }
-    else
+    else if ( level == 8)
     {
         level_title  = 100000;
-        puts("*** This is incredible! You have won!");
-        printf("*** Congratulations %s!\n", aux_nome);
-        exit(0);
     }
     char joker50_text[1000];
     if (joker_50_50 == 1 )
@@ -488,4 +485,10 @@ void printScore(char *aux_nome, int level, int joker_50_50)
     printf("*** j50:   %-32s*\n", joker50_text);
     printf("*** j25:   %-32s*\n", joker25_text);
     printf("********************************************\n");
+    if (level == 8)     // quando chega ao lvl 8 faz print do menu e da exit
+    {
+        puts("*** This is incredible! You have won!");
+        printf("*** Congratulations %s!\n", aux_nome);
+        exit(0);
+    }
 }
