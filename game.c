@@ -17,7 +17,9 @@ int level = 0;
 node* game(node*head, char * aux_nome)
 {	
     node * aux;
-   
+    if (level < 0)
+        level = 0;
+    
     char Option_List[6] = {'A','B','C','D','J','Q'};
     int i = 0;
     int r = rand() % 4;
@@ -86,8 +88,8 @@ node* game(node*head, char * aux_nome)
         
         if(toupper(aux_char) == Option_List[0])
         {
-            puts("*** Hooray!");
-            printScore(aux_nome, level, joker_50_50);
+            puts(">*** Hooray!");
+            
             level += 1;
             
 
@@ -108,14 +110,14 @@ node* game(node*head, char * aux_nome)
                 }
                 else if(toupper(aux_char) == Option_List[0])
                 {
-                    puts("*** Hooray!");
-                   printScore(aux_nome, level, joker_50_50);
+                    puts(">*** Hooray!");
+                   
                     level += 1;
                     
                 }
                 else
                 {
-                    puts("*** Woops... That's not correct.");
+                    puts(">*** Woops... That's not correct.");
                     printf("*** The correct answer was %c: %s", Option_List[0],aux->answer[0]);
                 }
                 
@@ -124,7 +126,7 @@ node* game(node*head, char * aux_nome)
         
         else
         {
-            puts("*** Woops... That's not correct.");
+            puts(">*** Woops... That's not correct.");
             printf("*** The correct answer was %c: %s", Option_List[0],aux->answer[0]);
         }
         
@@ -134,8 +136,8 @@ node* game(node*head, char * aux_nome)
     {   
         if(toupper(aux_char) == Option_List[1])
         {
-            puts("*** Hooray!");
-            printScore(aux_nome, level, joker_50_50);
+            puts(">*** Hooray!");
+            
             level += 1;
             
         }
@@ -156,13 +158,13 @@ node* game(node*head, char * aux_nome)
                 }
                 else if(toupper(aux_char) == Option_List[1])
                 {
-                    puts("*** Hooray!");
-                    printScore(aux_nome, level, joker_50_50);
+                   puts(">*** Hooray!");
+         
                     level += 1;
                 }
                 else
                 {
-                    puts("*** Woops... That's not correct.");
+                    puts(">*** Woops... That's not correct.");
                     printf("*** The correct answer was %c: %s", Option_List[1],aux->answer[0]);
                     level -= 1;
                 }
@@ -172,7 +174,7 @@ node* game(node*head, char * aux_nome)
 
         else
         {
-            puts("*** Woops... That's not correct.");
+            puts(">*** Woops... That's not correct.");
             printf("*** The correct answer was %c: %s", Option_List[1],aux->answer[0]);
             level -= 1;
         }
@@ -183,8 +185,8 @@ node* game(node*head, char * aux_nome)
         
         if(toupper(aux_char) == Option_List[2])
         {
-            puts("*** Hooray!");
-            printScore(aux_nome, level, joker_50_50);
+            puts(">*** Hooray!");
+            
             level += 1;
         }
         else if(toupper(aux_char) == Option_List[4])
@@ -203,13 +205,13 @@ node* game(node*head, char * aux_nome)
                 }
                 if(toupper(aux_char) == Option_List[2])
                 {
-                    puts("*** Hooray!");
-                    printScore(aux_nome, level, joker_50_50);
+                    puts(">*** Hooray!");
+                    
                     level += 1;
                 }
                 else
                 {
-                    puts("*** Woops... That's not correct.");
+                    puts(">*** Woops... That's not correct.");
                     printf("*** The correct answer was %c: %s", Option_List[2],aux->answer[0]);
                     level -= 1;
                 }
@@ -219,7 +221,7 @@ node* game(node*head, char * aux_nome)
 
         else
         {
-            puts("*** Woops... That's not correct.");
+            puts(">*** Woops... That's not correct.");
             printf("*** The correct answer was %c: %s", Option_List[2],aux->answer[0]);
             level -= 1;
         }
@@ -229,8 +231,8 @@ node* game(node*head, char * aux_nome)
     {
         if(toupper(aux_char) == Option_List[3])
         {    
-            puts("*** Hooray!");
-            printScore(aux_nome, level, joker_50_50);
+            puts(">*** Hooray!");
+            
             level += 1;
         }
         else if(toupper(aux_char) == Option_List[4])
@@ -248,16 +250,16 @@ node* game(node*head, char * aux_nome)
                 }
                 else if(toupper(aux_char) == Option_List[3])
                 {
-                    puts("*** Hooray!");
-                    printScore(aux_nome, level, joker_50_50);
+                    puts(">*** Hooray!");
+                    
                     level += 1;
                 }
                 else
                 {
-                    puts("*** Woops... That's not correct.");
+                   puts(">*** Woops... That's not correct.");
                     printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
                     level -= 1;
-                    printScore(aux_nome, level, joker_50_50); 
+                     
                 }
                 
             }
@@ -265,7 +267,7 @@ node* game(node*head, char * aux_nome)
 
         else
         {
-            puts("*** Woops... That's not correct.");
+            puts(">*** Woops... That's not correct.");
             printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
             level -= 1;
             
@@ -458,7 +460,7 @@ void printScore(char *aux_nome, int level, int joker_50_50)
     {
         level_title  = 100000;
         puts("*** This is incredible! You have won!");
-        puts("*** Congratulations pedro!");
+        printf("*** Congratulations %s!\n", aux_nome);
         exit(0);
     }
     char joker50_text[1000];
