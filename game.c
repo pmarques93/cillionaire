@@ -4,13 +4,15 @@
 #include <time.h>
 #include <ctype.h>
 
-void joker(node*, int *);
+void joker50(node*, int *);
+void joker25(node*, int *);
 unsigned int level_check (node* ,int );
 char player_choice [100];
 char aux_char;
 int aux_type;
 int joker_50_50 = 1;
-
+int joker_25_75 = 1;
+int level = 0;
 node* game(node*head, char * aux_nome)
 {	
     node * aux;
@@ -19,11 +21,11 @@ node* game(node*head, char * aux_nome)
     int i = 0;
     int r = rand() % 4;
     
-
+    printScore(aux_nome, level);
     for (aux = head; aux != NULL; aux = aux -> next, i++)
     {       
             //Variavel que ve em que nivel o jogador esta
-            int level = 0;
+            
             if(aux->difficulty == level_check (aux,level)) //falta so fazer com o nivel suba se o jogador acertaruma pergunta
             {  
                 if (r == 0)
@@ -84,7 +86,8 @@ node* game(node*head, char * aux_nome)
         if(toupper(aux_char) == Option_List[0])
         {
             puts("*** Hooray!");
-            printScore(aux_nome);
+            printScore(aux_nome, level);
+            level += 1;
             
 
         
@@ -93,7 +96,7 @@ node* game(node*head, char * aux_nome)
         {
             if (aux_type == 50)
             {
-                joker(head, &r);
+                joker50(head, &r);
                 fgets(player_choice, 100, stdin);
                 sscanf(player_choice,"%c%d", &aux_char, &aux_type);
                 joker_50_50 = 0;
@@ -105,7 +108,8 @@ node* game(node*head, char * aux_nome)
                 else if(toupper(aux_char) == Option_List[0])
                 {
                     puts("*** Hooray!");
-                    printScore(aux_nome);
+                   printScore(aux_nome, level);
+                    level += 1;
                     
                 }
                 else
@@ -130,7 +134,8 @@ node* game(node*head, char * aux_nome)
         if(toupper(aux_char) == Option_List[1])
         {
             puts("*** Hooray!");
-            printScore(aux_nome);
+            printScore(aux_nome, level);
+            level += 1;
             
         }
         
@@ -139,7 +144,7 @@ node* game(node*head, char * aux_nome)
             if (aux_type == 50)
             {
                 joker_50_50 = 0;
-                joker(head, &r);
+                joker50(head, &r);
                 fgets(player_choice, 100, stdin);
                 sscanf(player_choice,"%c%d", &aux_char, &aux_type);
                 
@@ -151,12 +156,14 @@ node* game(node*head, char * aux_nome)
                 else if(toupper(aux_char) == Option_List[1])
                 {
                     puts("*** Hooray!");
-                    printScore(aux_nome);
+                    printScore(aux_nome, level);
+                    level += 1;
                 }
                 else
                 {
                     puts("*** Woops... That's not correct.");
                     printf("*** The correct answer was %c: %s", Option_List[1],aux->answer[0]);
+                    level -= 1;
                 }
                 
             }        
@@ -166,6 +173,7 @@ node* game(node*head, char * aux_nome)
         {
             puts("*** Woops... That's not correct.");
             printf("*** The correct answer was %c: %s", Option_List[1],aux->answer[0]);
+            level -= 1;
         }
     }
 
@@ -175,14 +183,15 @@ node* game(node*head, char * aux_nome)
         if(toupper(aux_char) == Option_List[2])
         {
             puts("*** Hooray!");
-            printScore(aux_nome);
+            printScore(aux_nome, level);
+            level += 1;
         }
         else if(toupper(aux_char) == Option_List[4])
         {
             if (aux_type == 50)
             {
                 joker_50_50 = 0;
-                joker(head, &r);
+                joker50(head, &r);
                 fgets(player_choice, 100, stdin);
                 sscanf(player_choice,"%c%d", &aux_char, &aux_type);
                 
@@ -194,12 +203,14 @@ node* game(node*head, char * aux_nome)
                 if(toupper(aux_char) == Option_List[2])
                 {
                     puts("*** Hooray!");
-                    printScore(aux_nome);
+                    printScore(aux_nome, level);
+                    level += 1;
                 }
                 else
                 {
                     puts("*** Woops... That's not correct.");
                     printf("*** The correct answer was %c: %s", Option_List[2],aux->answer[0]);
+                    level -= 1;
                 }
                 
             }    
@@ -209,6 +220,7 @@ node* game(node*head, char * aux_nome)
         {
             puts("*** Woops... That's not correct.");
             printf("*** The correct answer was %c: %s", Option_List[2],aux->answer[0]);
+            level -= 1;
         }
     }
 
@@ -217,14 +229,15 @@ node* game(node*head, char * aux_nome)
         if(toupper(aux_char) == Option_List[3])
         {    
             puts("*** Hooray!");
-            printScore(aux_nome);
+            printScore(aux_nome, level);
+            level += 1;
         }
         else if(toupper(aux_char) == Option_List[4])
         {
             if (aux_type == 50)
             {
                 joker_50_50 = 0;
-                joker(head, &r);
+                joker50(head, &r);
                 fgets(player_choice, 100, stdin);
                 sscanf(player_choice,"%c%d", &aux_char, &aux_type);
                 if(toupper(aux_char) == Option_List[5])
@@ -235,13 +248,15 @@ node* game(node*head, char * aux_nome)
                 else if(toupper(aux_char) == Option_List[3])
                 {
                     puts("*** Hooray!");
-                    printScore(aux_nome);
+                    printScore(aux_nome, level);
+                    level += 1;
                 }
                 else
                 {
                     puts("*** Woops... That's not correct.");
                     printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
-                    printScore(aux_nome); 
+                    level -= 1;
+                    printScore(aux_nome, level); 
                 }
                 
             }
@@ -251,6 +266,7 @@ node* game(node*head, char * aux_nome)
         {
             puts("*** Woops... That's not correct.");
             printf("*** The correct answer was %c: %s", Option_List[3],aux->answer[0]);
+            level -= 1;
             
 
         } 
@@ -274,7 +290,7 @@ node* game(node*head, char * aux_nome)
 }
 
 
-void joker(node*head, int *r)
+void joker50(node*head, int *r)
 {
     node * aux;
     char Option_List[4] = {'A','B','C','D'};
@@ -282,7 +298,6 @@ void joker(node*head, int *r)
    
     
     int j = rand() % (3 - 1 + 1) + 1;
-    printf("%d", j);
     for (aux = head; aux != NULL; aux = aux -> next, i++)
     {
        if(aux->difficulty == 0)
@@ -358,6 +373,14 @@ void joker(node*head, int *r)
     }
 }
 
+//void joker25(node*head, int *r)
+//{
+    
+    //Inserirn codigo do joker 25 75 aqui
+    //ja ta definido no resto dos ficheiros
+//}
+
+
 //funcao que verifica o patamar do jogador
 //recebe os nodes e o nivel atual
 //retorna um valor entre 0 e 2 para a dificuldade
@@ -383,4 +406,56 @@ unsigned int level_check (node* aux,int level)
     }
         
     return difficulty;
+}
+
+void printScore(char *aux_nome, int level)
+{
+
+    int level_title;
+    if (level == 0)
+    {
+        
+        level_title = 0;
+
+    }
+        
+    else if ( level == 1)
+    {
+        level_title = 500;
+    }
+        
+    else if ( level == 2)
+    {
+        level_title = 1000;
+    }
+    else if ( level == 3)
+    {
+        level_title  = 2000;
+    }
+    else if ( level == 4)
+    {
+        level_title  = 5000;
+    }
+    else if ( level == 5)
+    {
+        level_title  = 10000;
+    }
+    else if ( level == 6)
+    {
+        level_title  = 200000;
+    }
+    else if ( level == 7)
+    {
+        level_title  = 500000;
+    }
+    else
+    {
+        level_title  = 100000;
+    }
+    printf("********************************************\n");
+    printf("*** Name:  %-32s*\n", aux_nome);
+    printf("*** Level: %d\n", level_title);
+    printf("*** j50:   %-32s*\n", "YES");
+    printf("*** j25:   %-32s*\n", "YES");
+    printf("********************************************\n");
 }

@@ -27,7 +27,7 @@ void keyPress(char * file_name)
             head = readFile(file_name);
             sscanf(line,"%c%s", &aux_2, aux_nome);
             printf("*** Hi %s, let's get started!\n", aux_nome);
-            printScore(aux_nome);
+            
             game(head, aux_nome);   
             break;
 
@@ -159,15 +159,7 @@ void printMenu(void)
    printf(">");
 }
 
-void printScore(char *aux_nome)
-{
-   printf("********************************************\n");
-   printf("*** Name:  %-32s*\n", aux_nome);
-   printf("*** Level: %-32s*\n", "0");
-   printf("*** j50:   %-32s*\n", "YES");
-   printf("*** j25:   %-32s*\n", "YES");
-   printf("********************************************\n");
-}
+
 
 
 
