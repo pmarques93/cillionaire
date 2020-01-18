@@ -25,10 +25,9 @@ node* game(node*head, char * aux_nome)
     
     if (fail == 2)
     {
-        puts("youlost");
+        puts("*** Sorry, you have lost the game. Bye!");
         exit(0);
-    }
-    printf("%d", fail);  
+    }  
     char Option_List[6] = {'A','B','C','D','J','Q'};
     int i = 0;
     int r = rand() % 4;
@@ -101,7 +100,7 @@ node* game(node*head, char * aux_nome)
             if(toupper(aux_char) == Option_List[0])
             {
                 puts(">*** Hooray!");
-                 fail = 0;
+                fail = 0;
                 level += 1;
                 
 
@@ -251,7 +250,7 @@ node* game(node*head, char * aux_nome)
             if(toupper(aux_char) == Option_List[3])
             {    
                 puts(">*** Hooray!");
-                 fail = 0;
+                fail = 0;
                 level += 1;
             }
             else if(toupper(aux_char) == Option_List[4])
@@ -270,7 +269,7 @@ node* game(node*head, char * aux_nome)
                     else if(toupper(aux_char) == Option_List[3])
                     {
                         puts(">*** Hooray!");
-                         fail = 0;
+                        fail = 0;
                         level += 1;
                     }
                     else
@@ -423,11 +422,7 @@ unsigned int level_check (node* aux,int level)
 
     }
         
-<<<<<<< HEAD
     else if ( level >= 3 && level < 5)
-=======
-    else if ( level > 2 && level < 5)
->>>>>>> 9fb8635d08b9787a7bc0bf48d176cc1f57a0e0e2
     {
 
         aux ->difficulty = 1;
