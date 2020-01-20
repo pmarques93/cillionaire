@@ -24,7 +24,7 @@ Posteriormente, criámos/desenvolvemos as funções *printScore()* e *level_chec
 
 Depois de todos estes passos, apercebemo-nos que a *seed* e o comando para leitura de ficheiros recebidos na *command line* não estavam a funcionar como era suposto. Procedemos então à alteração da estrutura da *main()*, *game()* e *readFile()* de modo a que recebesse as opções como pedido no enunciado.
 
-Por fim, criámos a função *joker25()*, contudo, apesar da funcionalidade da mesma na execução do código, o *Pandora* não aceita a execução da mesma.
+Por fim, criámos a função *joker25()*, contudo, apesar da funcionalidade da mesma na execução do código, o *Pandora* não aceita a sua execução.
 
 ---
 
