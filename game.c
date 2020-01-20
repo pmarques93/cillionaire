@@ -14,11 +14,11 @@ int aux_type;
 int joker_50_50 = 1;
 int joker_25_75 = 1;
 int level = 0;
-int dif_up = 0;
 int level_title;
 int fail = 0;
+int passou=0;
 unsigned level_up = 0;
-node* game(node*head, char * aux_nome)
+node* game(node*head, char * aux_nome)  
 {	
     node * aux;
     if (level < 0)
@@ -29,28 +29,52 @@ node* game(node*head, char * aux_nome)
     int i = 0;
     int r = rand() % 4;
     
-     printScore(aux_nome, level, joker_50_50);
+    printScore(aux_nome, level, joker_50_50);
    
     
 
 
     for (aux = head; aux != NULL; aux = aux -> next, i++)
     {     
-            
-            if ( level-1 == 2)
+            if ( aux == NULL)
             {
-                aux=head;
+                puts("*** This is embarrassing but we’re out of questions.");
+                exit(0);
+            }
+            if (level < 3)
+            {
+                level_up = 0;
                 
             }
-
-            if ( level-1 == 4)
+            else if (level >= 3 && level < 5)
             {
+                level_up = 1;
+               
+            }
+            else if (level >= 5)
+            {
+                level_up = 2;
+               
+            }
+
+            if(level-1 == 2 && passou == 0)
+            {
+                passou = 1;
+                aux = head;  
+            }
+
+            if ( level-1 == 4 && passou == 1)
+            {  
+                passou = 2; 
+                // printf("level_up: %d\n", level_up);
                 aux=head;
             }
+            
         
             //Variavel que ve em que nivel o jogador esta
-            if(aux->difficulty == level_check (aux, level)) //falta so fazer com o nivel suba se o jogador acertaruma pergunta
+            if(aux->difficulty == level_up) //falta so fazer com o nivel suba se o jogador acertaruma pergunta
             {  
+                // printf("level_up: %d\n", level_up);
                 
                 if (r == 0)
                 {  
@@ -453,9 +477,13 @@ node* game(node*head, char * aux_nome)
             } 
         }
         
+
+        
+        free(aux);
+        
     }  
 
-        return head;
+    return head;
         
 
 }
@@ -464,7 +492,7 @@ void joker50(node*aux, int *r)
     aux = aux->next;
     char Option_List[4] = {'A','B','C','D'};
     joker_50_50 = 0;
-    
+    // *r  = rand() % 4;
     int j = rand() % (1) + 1;
     //printf("%d",j);
     //printf("%d", *r);
@@ -532,7 +560,8 @@ void joker50(node*aux, int *r)
             printf("*** %c: %s",Option_List[3],aux->answer[0]);
             
         }         
-    }         
+    } 
+    *r =  rand() %4;       
 }
 
 
@@ -590,7 +619,6 @@ void printScore(char *aux_nome, int level, int joker_50_50)
         
     else if ( level == 2)
     {
-        level_up = 1;
         level_title = 1000;
     }
     else if ( level == 3)
