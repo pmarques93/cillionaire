@@ -18,11 +18,13 @@ Após este passo, editámos o *readFile()* de modo a que a resposta certa fosse 
 
 Com estes passos feitos, dividimos os ficheiros de modo a criar um código mais organizado.
 
-De seguida criámos a função *joker50* que imprime a resposta certa mais outra resposta randomizada da pergunta analisada.
+De seguida criámos a função *joker50()* que imprime a resposta certa mais outra resposta randomizada da pergunta analisada.
 
 Posteriormente, criámos/desenvolvemos as funções *printScore()* e *level_check()*. A *printScore()* ficou então responsável por imprimir o nome, *score* e *jokers* depois de cada jogada e a *level_check()* serviu para sabermos em que nível nos encontrávamos depois de cada resposta.
 
 Depois de todos estes passos, apercebemo-nos que a *seed* e o comando para leitura de ficheiros recebidos na *command line* não estavam a funcionar como era suposto. Procedemos então à alteração da estrutura da *main()*, *game()* e *readFile()* de modo a que recebesse as opções como pedido no enunciado.
+
+Por fim, criámos a função *joker25()*, contudo, apesar da funcionalidade da mesma na execução do código, o *Pandora* não aceita a execução das mesma.
 
 ---
 
@@ -52,6 +54,8 @@ O software é executado com as seguintes *libraries*, ficheiros e funções:
   - Responsável por correr todo o jogo;
 - *joker50()*;
   - Corta 2 opções erradas e deixa apenas a certa e um das outras opções;
+ - *joker50()*;
+  - Corta 1 opcção errada e deixa apenas a certa e uma das outras opções;
 - *level_check()*;
   - Responsável por retornar a dificuldade do jogo consoante o *score* definido;
 - *printScore()*;
